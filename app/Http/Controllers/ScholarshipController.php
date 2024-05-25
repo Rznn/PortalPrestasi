@@ -169,17 +169,17 @@ class ScholarshipController extends Controller
         ]);
     }
 
-    public function selectawardee(Request $request)
+    public function selectawardee(Request $request, $id)
     {
-        // Validasi input
+        $scholarships = Scholarship::findOrFail($id);
         $request->validate([
             'awardee' => 'required|array|min:1',
             'awardee.*' => 'required|integer|distinct',
         ]);
 
-        // Simpan pemenang ke dalam tabel awardee
         foreach ($request->awardee as $winnerId) {
             $awardee = new Awardee();
+            $awardee->scholarship_id = $scholarships->id;
             $awardee->scholarship_participant_id = $winnerId;
             $awardee->save();
         }
