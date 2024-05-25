@@ -15,12 +15,10 @@ class Work extends Model
         'job_name',
         'company',
         'description',
-        'requirement',
+        'information',
         'image',
         'contact',
         'email',
         'salary',
-        'end_competition',
-        'status',
     ];
 }

@@ -15,12 +15,13 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('competition_id');
+            $table->string('fullname');
+            $table->string('nik');
             $table->string('nim');
             $table->string('instance');
             $table->string('department');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('competition_id')->references('id')->on('competitions');
-            $table->softDeletes();
             $table->timestamps();
         });
     }

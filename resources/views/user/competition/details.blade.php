@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Details</title>
+    <title>Detail</title>
 </head>
 <body>
     <h1>Detail Competition</h1>
@@ -27,7 +27,6 @@
     <p>{{ $competitions->status }}</p>
     <h3>Action</h3>
     <a href="{{ $competitions->rules }}" target="_blank">View Rules</a>
-    <a href="{{ route('competition.delete', $competitions->id) }}">Delete</a>
-    <a href="{{ route('competition.edit', $competitions->id) }}">Edit</a>
+    <a href="{{ route('user.competition.enroll', $competitions->id) }}">Enroll</a>
 </body>
 </html>

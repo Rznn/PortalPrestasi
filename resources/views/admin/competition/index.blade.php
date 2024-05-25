@@ -8,6 +8,8 @@
 </head>
 <body>
     <h1>Competition</h1>
+    <a href="/admin/dashboard">Back to Dashboard</a>
+    <br>
     <a href="/admin/competition/create">Create Competition</a>
     <table>
         <thead>
@@ -31,10 +33,22 @@
                 <td>{{$competition->start_competition}}</td>
                 <td>{{$competition->status}}</td>
                 <td>
-                    <a href="{{ route('competition.detail', $competition->id) }}">Details</a>
-                    <a href="">Change</a>
-                    <a href="">Winner</a>
-                    <a href="">Modal</a>
+                    @if ($competition->status == 'upcoming')
+                        <a href="{{ route('competition.detail', $competition->id) }}">Details</a>
+                        <a href="{{ route('competition.toregistration', $competition->id) }}">Open Registration</a>
+                    @elseif ($competition->status == 'registration')
+                        <a href="{{ route('competition.detail', $competition->id) }}">Details</a>
+                        <a href="{{ route('competition.toongoing', $competition->id) }}">Start Competition</a>
+                    @elseif ($competition->status == 'ongoing')
+                        <a href="{{ route('competition.detail', $competition->id) }}">Details</a>
+                        <a href="{{ route('competition.tofinished', $competition->id) }}">Finish Competition</a>
+                    @else
+                        <a href="{{ route('competition.detail', $competition->id) }}">Details</a>
+                        @if ($competition->competition_participants->isNotEmpty())
+                        <a href="{{ route('competition.winner', $competition->id) }}">Select Winner</a>
+                        @endif
+                        <a href="#">View Winner</a>
+                    @endif
                 </td>
             </tr>
             @endforeach

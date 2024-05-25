@@ -22,7 +22,7 @@ return new class extends Migration
             $table->dateTime('end_registration');
             $table->dateTime('start_scholarship');
             $table->dateTime('end_scholarship');
-            $table->enum('status', ['closed', 'registration', 'on_going', 'finished']);
+            $table->enum('status', ['upcoming', 'registration', 'ongoing', 'finished']);
             $table->softDeletes();
             $table->timestamps();
         });

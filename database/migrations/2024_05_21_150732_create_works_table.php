@@ -16,12 +16,11 @@ return new class extends Migration
             $table->string('job_name');
             $table->string('company');
             $table->text('description');
-            $table->string('requirement');
+            $table->string('information');
             $table->string('image');
             $table->string('contact');
             $table->string('email');
             $table->bigInteger('salary');
-            $table->enum('status', ['registration', 'closed']);
             $table->softDeletes();
             $table->timestamps();
         });
