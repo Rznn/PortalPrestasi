@@ -1,53 +1,87 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Create Competition</title>
-</head>
-<body>
-    <h1>Edit Competition</h1>
-    <form action="{{ route('competition.update', $competitions->id) }}" method="post" enctype="multipart/form-data">
-        @csrf
-        @method('put')
-        <label for="name">Competition Name</label>
-        <input type="text" name="name" id="name"  placeholder="Enter Competition Name" value="{{ $competitions->name }}" required>
+@extends('layout.admin.master')
+@section('content')
+    <div class=" gap-6 mt-8">
 
-        <label for="organizer">Organizer</label>
-        <input type="text" name="organizer" id="organizer" placeholder="Enter Competition Organizer" value="{{ $competitions->organizer }}" required>
+        <div class="flex flex-col gap-6">
+            <div class="card">
+                <div class="p-6">
+                    <h4 class="card-title mb-4">Browser defaults</h4>
+                    <form action="{{ route('competition.update', $competitions->id) }}" method="post"
+                        enctype="multipart/form-data">
+                        @csrf
+                        @method('put')
+                        <div>
+                            <label for="name" class="text-gray-800 text-sm font-medium inline-block mb-2">Competition
+                                Name</label>
+                            <input class="form-input" type="text" name="name" id="name"
+                                value="{{ $competitions->name }}" required>
+                        </div>
+                        <div>
+                            <label for="organizer" class="text-gray-800 text-sm font-medium inline-block mb-2">Competition
+                                Organizer</label>
+                            <input class="form-input" type="text" name="organizer" id="organizer"
+                                value="{{ $competitions->organizer }}" required>
+                        </div>
 
-        <label for="description">Description</label>
-        <textarea name="description" id="description" placeholder="Enter Competition Description" cols="30" rows="10" required>{{ $competitions->description }}</textarea>
+                        <div>
+                            <label for="rules" class="text-gray-800 text-sm font-medium inline-block mb-2">Rule's
+                                Link</label>
+                            <input type="url" class="form-input" name="rules" id="rules"
+                                value="{{ $competitions->rules }}" required>
+                        </div>
+                        <div>
+                            <label for="start_registration"
+                                class="text-gray-800 text-sm font-medium inline-block mb-2">Start Registration</label>
+                            <input class="form-input" type="date" name="start_registration" id="start_registration"
+                                value="{{ \Carbon\Carbon::parse($competitions->start_registration)->format('Y-m-d') }}"
+                                required>
+                        </div>
+                        <div>
+                            <label for="end_registration" class="text-gray-800 text-sm font-medium inline-block mb-2">End
+                                Registration</label>
+                            <input class="form-input" type="date" name="end_registration" id="end_registration"
+                                value="{{ \Carbon\Carbon::parse($competitions->end_registration)->format('Y-m-d') }}"
+                                required>
+                        </div>
+                        <div>
+                            <label for="start_competition" class="text-gray-800 text-sm font-medium inline-block mb-2">Start
+                                Competition</label>
+                            <input class="form-input" type="date" name="start_competition" id="start_competition"
+                                value="{{ \Carbon\Carbon::parse($competitions->start_competition)->format('Y-m-d') }}"
+                                required>
+                        </div>
+                        <div>
+                            <label for="end_competition" class="text-gray-800 text-sm font-medium inline-block mb-2">End
+                                Competition</label>
+                            <input class="form-input" type="date" name="end_competition" id="end_competition"
+                                value="{{ \Carbon\Carbon::parse($competitions->end_competition)->format('Y-m-d') }}"
+                                required>
+                        </div>
+                        <div class="col-span-3">
+                            <label for="description"
+                                class="text-gray-800 text-sm font-medium inline-block mb-2">Description</label>
+                            <textarea rows="4" class="form-textarea" name="description" id="description"
+                                value="{{ $competitions->description }}"></textarea>
+                        </div>
 
-        <label for="rules">Rule's Link</label>
-        <input type="url" name="rules" id="rules" placeholder="Enter Competition Rules" value="{{ $competitions->rules }}" required>
+                        <div class="col-span-3">
+                            <label for="image" class="text-gray-800 text-sm font-medium inline-block mb-2">Photo</label>
+                            <input type="file" name="image" id="image" class="dropify"
+                                data-default-file="url_of_your_file" />
+                        </div>
 
-        <label for="image">Photo</label>
-        <input type="file" name="image" id="image">
+                        <div class="col-span-3 mt-3">
+                            <button type="submit" class="btn bg-primary text-white">Submit</button>
+                            <a href="{{ route('competition.detail', $competitions->id) }}"
+                                class="btn bg-primary text-white">Back</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        @if($competitions->image)
-            <label for="image">Current Photo</label>
-            <img src="{{ asset('storage/competition-images/' . $competitions->image) }}" alt="Competition Image" style="max-width: 200px;">
-        @endif
-
-        <br>
-
-        <label for="start_registration">Start Registration</label>
-        <input type="date" name="start_registration" id="start_registration" value="{{ \Carbon\Carbon::parse($competitions->start_registration)->format('Y-m-d') }}" required>
-
-        <label for="end_registration">End Registration</label>
-        <input type="date" name="end_registration" id="end_registration" value="{{ \Carbon\Carbon::parse($competitions->end_registration)->format('Y-m-d') }}" required>
-
-        <label for="start_competition">Start Competition</label>
-        <input type="date" name="start_competition" id="start_competition" value="{{ \Carbon\Carbon::parse($competitions->start_competition)->format('Y-m-d') }}" required>
-
-        <label for="end_competition">End Competition</label>
-        <input type="date" name="end_competition" id="end_competition" value="{{ \Carbon\Carbon::parse($competitions->end_competition)->format('Y-m-d') }}" required>
-
-        <br>
-
-        <input type="submit" class="button" value="Submit">
-    </form>
-</body>
-</html>
+    <script>
+        $('.dropify').dropify();
+    </script>
+@endsection
