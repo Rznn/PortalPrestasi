@@ -25,7 +25,11 @@ class Competition extends Model
     ];
 
     protected $attributes = [
-        'status' => 'closed'
+        'status' => 'upcoming'
     ];
 
+    public function competition_participants()
+    {
+        return $this->hasMany(CompetitionParticipant::class);
+    }
 }

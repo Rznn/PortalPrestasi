@@ -30,7 +30,7 @@ class AuthController extends Controller
             }
             //user
             if (Auth::user()->role_id == 2) {
-                return redirect('/user/dashboard');
+                return redirect()->route('user.dashboard');
             }
         }
         //error

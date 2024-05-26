@@ -3,21 +3,19 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Winner extends Model
 {
     use HasFactory;
-    use SoftDeletes;
 
     protected $fillable = [
-        'user_id',
-        'competition_id',
+        'competition_participant_id',
+        'position',
     ];
 
-    public function scholarships()
+    public function competition_participants()
     {
-        return $this->belongsTo(Competition::class, 'competition_id');
+        return $this->belongsTo(CompetitionParticipant::class, 'competition_participant_id');
     }
 }

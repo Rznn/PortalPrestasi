@@ -15,12 +15,13 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('scholarship_id');
+            $table->string('fullname');
+            $table->string('nik');
             $table->string('nim');
             $table->string('instance');
             $table->string('department');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('scholarship_id')->references('id')->on('scholarships');
-            $table->softDeletes();
             $table->timestamps();
         });
     }

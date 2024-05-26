@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Details</title>
+    <title>Detail</title>
 </head>
 <body>
     <h1>Detail Scholarship</h1>
@@ -27,7 +27,6 @@
     <p>{{ $scholarships->status }}</p>
     <h3>Action</h3>
     <a href="{{ $scholarships->requirement }}" target="_blank">View Requirement</a>
-    <a href="{{ route('scholarship.delete', $scholarships->id) }}">Delete</a>
-    <a href="{{ route('scholarship.edit', $scholarships->id) }}">Edit</a>
+    <a href="{{ route('user.scholarship.enroll', $scholarships->id) }}">Enroll</a>
 </body>
 </html>

@@ -13,10 +13,9 @@ return new class extends Migration
     {
         Schema::create('winners', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('competition_id');
+            $table->unsignedBigInteger('competition_participant_id');
             $table->enum('position', ['1', '2', '3']);
-            $table->foreign('competition_id')->references('id')->on('competitions');
-            $table->softDeletes();
+            $table->foreign('competition_participant_id')->references('id')->on('competition_participants');
             $table->timestamps();
         });
     }

@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('awardees', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('scholarship_id');
-            $table->foreign('scholarship_id')->references('id')->on('scholarships');
-            $table->softDeletes();
+            $table->unsignedBigInteger('scholarship_participant_id');
+            $table->foreign('scholarship_participant_id')->references('id')->on('scholarship_participants');
             $table->timestamps();
         });
     }

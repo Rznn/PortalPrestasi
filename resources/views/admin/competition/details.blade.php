@@ -25,6 +25,8 @@
     <p>{{ $competitions->start_competition }}</p>
     <h3>End Competition</h3>
     <p>{{ $competitions->end_competition }}</p>
+    <h3>Status</h3>
+    <p>{{ $competitions->status }}</p>
     <h3>Action</h3>
     <a href="{{ $competitions->rules }}" target="_blank">View Rules</a>
     <a href="{{ route('competition.delete', $competitions->id) }}">Delete</a>

@@ -25,6 +25,11 @@ class Scholarship extends Model
     ];
 
     protected $attributes = [
-        'status' => 'closed'
+        'status' => 'upcoming'
     ];
+
+    public function scholarship_participants()
+    {
+        return $this->hasMany(ScholarshipParticipant::class);
+    }
 }
