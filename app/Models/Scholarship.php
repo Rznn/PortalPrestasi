@@ -32,4 +32,9 @@ class Scholarship extends Model
     {
         return $this->hasMany(ScholarshipParticipant::class);
     }
+
+    public function awardees()
+    {
+        return $this->hasMany(Awardee::class);
+    }
 }

@@ -174,8 +174,9 @@ class CompetitionController extends Controller
         ]);
     }
 
-    public function selectwinner(Request $request)
+    public function selectwinner(Request $request, $id)
     {
+        $competitions = Competition::findOrFail($id);
         $request->validate([
             'winner1' => 'required',
             'winner2' => 'required',
@@ -184,6 +185,7 @@ class CompetitionController extends Controller
 
         if ($request->winner1){
             $winners1 = new Winner();
+            $winners1->competition_id = $competitions->id;
             $winners1->competition_participant_id = $request->winner1;
             $winners1->position = '1';
             $winners1->save();
@@ -191,6 +193,7 @@ class CompetitionController extends Controller
 
         if ($request->winner2){
             $winners2 = new Winner();
+            $winners2->competition_id = $competitions->id;
             $winners2->competition_participant_id = $request->winner2;
             $winners2->position = '2';
             $winners2->save();
@@ -198,6 +201,7 @@ class CompetitionController extends Controller
 
         if ($request->winner3){
             $winners3 = new Winner();
+            $winners3->competition_id = $competitions->id;
             $winners3->competition_participant_id = $request->winner3;
             $winners3->position = '3';
             $winners3->save();

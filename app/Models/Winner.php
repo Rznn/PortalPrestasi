@@ -10,6 +10,7 @@ class Winner extends Model
     use HasFactory;
 
     protected $fillable = [
+        'competition_id',
         'competition_participant_id',
         'position',
     ];
@@ -17,5 +18,10 @@ class Winner extends Model
     public function competition_participants()
     {
         return $this->belongsTo(CompetitionParticipant::class, 'competition_participant_id');
+    }
+
+    public function competitions()
+    {
+        return $this->belongsTo(Competition::class, 'competition_id');
     }
 }
