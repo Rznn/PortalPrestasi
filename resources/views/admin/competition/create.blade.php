@@ -1,4 +1,5 @@
 @extends('layout.admin.master')
+@section('title', 'Create Competition')
 @section('content')
     <main class="p-6">
         <div class="flex flex-col gap-6">
@@ -25,10 +26,10 @@
                         </div>
 
                         <div>
-                            <label for="rules" class="text-gray-800 text-sm font-medium inline-block mb-2">Rule's
-                                Link</label>
+                            <label for="rules" class="text-gray-800 text-sm font-medium inline-block mb-2">Competition
+                                Rules Link</label>
                             <input type="url" class="form-input" name="rules" id="rules"
-                                placeholder="Enter Competition Rules" required>
+                                placeholder="Enter Competition Rules Link" required>
                         </div>
 
 
@@ -65,7 +66,7 @@
                         <div class="col-span-3">
                             <label for="image" class="text-gray-800 text-sm font-medium inline-block mb-2">Photo</label>
                             <input type="file" name="image" id="image" required class="dropify"
-                                data-default-file="url_of_your_file" />
+                                data-default-file="Competititon Pamflet" />
                         </div>
 
                         <div class="col-span-3">

@@ -1,4 +1,5 @@
 @extends('layout.admin.master')
+@section('title', 'Edit Competition')
 @section('content')
     <div class=" gap-6 mt-8">
 
@@ -60,14 +61,13 @@
                         <div class="col-span-3">
                             <label for="description"
                                 class="text-gray-800 text-sm font-medium inline-block mb-2">Description</label>
-                            <textarea rows="4" class="form-textarea" name="description" id="description"
-                                value="{{ $competitions->description }}"></textarea>
+                            <textarea rows="4" class="form-textarea" name="description" id="description">{{ $competitions->description }}</textarea>
                         </div>
 
                         <div class="col-span-3">
                             <label for="image" class="text-gray-800 text-sm font-medium inline-block mb-2">Photo</label>
                             <input type="file" name="image" id="image" class="dropify"
-                                data-default-file="url_of_your_file" />
+                                data-default-file="Competition Pamflet" />
                         </div>
 
                         <div class="col-span-3 mt-3">

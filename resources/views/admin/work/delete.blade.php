@@ -1,13 +1,15 @@
 @extends('layout.admin.master')
-@section('title', 'Job Vacancy')
+@section('title', 'Job Vacancy Deleted List')
 @section('content')
     <main class="p-6">
         <div class="grid lg gap-6 mt-1">
-            <a href="/admin/work/create" style="width: 20%" class="btn bg-info text-white py-2 px-3">Add Job Vacancy</a>
+            <a href="/admin/work/index" style="width: 20%" class="btn bg-secondary text-white py-1 px-3">
+                <i class="uil uil-arrow-left text-xl me-2"></i>
+                Back
+            </a>
             <div class="card bg-white overflow-hidden">
-                <div class="card-header flex justify-between">
+                <div class="card-header">
                     <h4 class="card-title">Job Vacancy Table</h4>
-                    <a href="{{ route('work.deletelist') }}" class="btn bg-dark text-white text-xs">View Deleted List</a>
                 </div>
                 <div>
 
@@ -46,29 +48,14 @@
                                                     {{ $work->company }}</td>
                                                 <td>{{ $work->email }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                                                    Rp. {{ $work->salary }}</td>
+                                                    {{ $work->salary }}</td>
 
                                                 <td>
-                                                    <div class="hs-dropdown relative">
-                                                        <button type="button"
-                                                            class="hs-dropdown-toggle btn bg-primary text-white">
-                                                            Action <i class="uil uil-angle-down ms-2"></i>
-                                                        </button>
-
-                                                        <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 bg-white shadow py-2 z-10 hidden"
-                                                            style="min-width:5.6rem">
-                                                            <a class="flex items-center gap-x-3.5 py-2 px-3 text-sm text-gray-800 hover:bg-gray-100"
-                                                                href="{{ route('work.detail', $work->id) }}">
-                                                                Details</a>
-                                                            <a class="flex items-center gap-x-3.5 py-2 px-3 text-sm text-gray-800 hover:bg-gray-100"
-                                                                href="{{ route('work.edit', $work->id) }}">
-                                                                Edit</a>
-                                                            <a class="flex items-center gap-x-3.5 py-2 px-3 text-sm text-gray-800 hover:bg-gray-100"
-                                                                href="{{ $work->information }}" target="_blank">
-                                                                See
-                                                                Info</a>
-                                                        </div>
-                                                    </div>
+                                                    <a type="button"
+                                                       class="hs-dropdown-toggle btn bg-primary text-white text-xs"
+                                                       href="{{ route('work.restore', $work->id) }}">
+                                                       Restore
+                                                    </a>
                                                 </td>
                                             </tr>
                                         @endforeach

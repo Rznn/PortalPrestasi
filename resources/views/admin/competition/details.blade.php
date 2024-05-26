@@ -1,4 +1,5 @@
 @extends('layout.admin.master')
+@section('title', 'Detail Competition')
 @section('content')
     <div class="grid lg gap-6 mt-8">
 
@@ -8,7 +9,7 @@
                 <div class="px-6 py-8 flex gap-10">
                     <div class="mt-6 mb-4">
                         <img src="{{ asset('/storage/competition-images/' . $competitions->image) }}"
-                            class="h-auto max-w-full" alt="thumbnail">
+                            class="h-auto" alt="thumbnail" style="max-width:12rem">
                     </div>
                     <div class="mt-6 mb-4">
                         <p class="text-dark/75 mb-6 text-xl mt-3">{{ $competitions->name }}</p>

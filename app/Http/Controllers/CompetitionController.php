@@ -15,12 +15,13 @@ class CompetitionController extends Controller
     public function index()
     {
         $competitions = Competition::all();
-        $winner = Winner::all();
+        $winners = Winner::all();
         //  $competitions = Competition::with('competition_participants')->get();
         //  $countParticipants = $participants->count();
 
         return view('/admin/competition/index', [
             'competitions' => $competitions,
+            'winners' => $winners
         ]);
     }
 
@@ -210,4 +211,62 @@ class CompetitionController extends Controller
         return redirect('/admin/competition/index');
     }
 
+    public function editwinner(Request $request, $id)
+    {
+        $competitions = Competition::findOrFail($id);
+        $request->validate([
+            'winner1' => 'required',
+            'winner2' => 'required',
+            'winner3' => 'required',
+        ]);
+
+        // Hapus pemenang dengan posisi 1, 2, dan 3 untuk kompetisi ini
+        Winner::where('competition_id', $competitions->id)
+            ->whereIn('position', ['1', '2', '3'])
+            ->delete();
+
+        // Tambahkan pemenang baru dengan posisi 1
+        if ($request->winner1) {
+            Winner::create([
+                'competition_id' => $competitions->id,
+                'competition_participant_id' => $request->winner1,
+                'position' => '1',
+            ]);
+        }
+
+        // Tambahkan pemenang baru dengan posisi 2
+        if ($request->winner2) {
+            Winner::create([
+                'competition_id' => $competitions->id,
+                'competition_participant_id' => $request->winner2,
+                'position' => '2',
+            ]);
+        }
+
+        // Tambahkan pemenang baru dengan posisi 3
+        if ($request->winner3) {
+            Winner::create([
+                'competition_id' => $competitions->id,
+                'competition_participant_id' => $request->winner3,
+                'position' => '3',
+            ]);
+        }
+
+        return redirect('/admin/competition/index');
+    }
+
+    public function deletelist()
+    {
+        $competitions = Competition::onlyTrashed()->get();
+        return view('admin/competition/delete', [
+            'competitions' => $competitions,
+        ]);
+    }
+
+    public function restore($id)
+    {
+        $competitions = Competition::withTrashed()->findOrFail($id);
+        $competitions->restore();
+        return redirect('admin/competition/index');
+    }
 }

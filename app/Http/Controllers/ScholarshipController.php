@@ -187,4 +187,40 @@ class ScholarshipController extends Controller
         // Redirect atau berikan respons yang sesuai
         return redirect('/admin/scholarship/index');
     }
+
+    public function editawardee(Request $request, $id)
+    {
+        $scholarships = Scholarship::findOrFail($id);
+        $request->validate([
+            'awardee' => 'required|array|min:1',
+            'awardee.*' => 'required|integer|distinct',
+        ]);
+
+        // Hapus pemenang dengan posisi 1, 2, dan 3 untuk kompetisi ini
+        Awardee::where('scholarship_id', $scholarships->id)->delete();
+
+        foreach ($request->awardee as $winnerId) {
+            $awardee = new Awardee();
+            $awardee->scholarship_id = $scholarships->id;
+            $awardee->scholarship_participant_id = $winnerId;
+            $awardee->save();
+        }
+
+        return redirect('/admin/scholarship/index');
+    }
+
+    public function deletelist()
+    {
+        $scholarships = Scholarship::onlyTrashed()->get();
+        return view('admin/scholarship/delete', [
+            'scholarships' => $scholarships,
+        ]);
+    }
+
+    public function restore($id)
+    {
+        $scholarships = Scholarship::withTrashed()->findOrFail($id);
+        $scholarships->restore();
+        return redirect('admin/scholarship/index');
+    }
 }

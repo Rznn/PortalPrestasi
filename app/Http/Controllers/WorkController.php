@@ -113,4 +113,19 @@ class WorkController extends Controller
         $works->delete();
         return redirect('/admin/work/index');
     }
+
+    public function deletelist()
+    {
+        $works = Work::onlyTrashed()->get();
+        return view('admin/work/delete', [
+            'works' => $works,
+        ]);
+    }
+
+    public function restore($id)
+    {
+        $works = Work::withTrashed()->findOrFail($id);
+        $works->restore();
+        return redirect('admin/work/index');
+    }
 }

@@ -1,4 +1,5 @@
 @extends('layout.admin.master')
+@section('title', 'Edit Job')
 @section('content')
     <div class=" gap-6 mt-8">
 
@@ -59,7 +60,7 @@
                         <div class="col-span-3">
                             <label for="image" class="text-gray-800 text-sm font-medium inline-block mb-2">Photo</label>
                             <input type="file" name="image" id="image" class="dropify"
-                                data-default-file="url_of_your_file" />
+                                data-default-file="Company Logo" />
                         </div>
 
                         <div class="col-span-3 mt-3">
