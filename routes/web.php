@@ -47,6 +47,11 @@ Route::get('/admin/competition/{id}/to-finished', [CompetitionController::class,
 Route::get('/admin/competition/{id}/select-winner', [CompetitionController::class, 'winner'])->name('competition.winner');
 Route::post('/admin/competition/{id}/select-winner', [CompetitionController::class, 'selectwinner'])->name('competition.selectwinner');
 
+
+
+
+
+
 // admin scholarship index
 Route::get('/admin/scholarship/index', [ScholarshipController::class, 'index']);
 // admin scholarship create

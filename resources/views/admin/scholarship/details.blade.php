@@ -1,33 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Details</title>
-</head>
-<body>
-    <h1>Detail Scholarship</h1>
-    <img src="{{ asset('/storage/scholarship-images/'. $scholarships->image) }}" alt="" style="width: 200px">
-    <h3>Name</h3>
-    <p>{{ $scholarships->name }}</p>
-    <h3>Organizer</h3>
-    <p>{{ $scholarships->organizer }}</p>
-    <h3>Description</h3>
-    <p>{{ $scholarships->description }}</p>
-    <h3>Start Registration</h3>
-    <p>{{ $scholarships->start_registration }}</p>
-    <h3>End Registration</h3>
-    <p>{{ $scholarships->end_registration }}</p>
-    <h3>Start Scholarship</h3>
-    <p>{{ $scholarships->start_scholarship }}</p>
-    <h3>End Scholarship</h3>
-    <p>{{ $scholarships->end_scholarship }}</p>
-    <h3>Status</h3>
-    <p>{{ $scholarships->status }}</p>
-    <h3>Action</h3>
-    <a href="{{ $scholarships->requirement }}" target="_blank">View Requirement</a>
-    <a href="{{ route('scholarship.delete', $scholarships->id) }}">Delete</a>
-    <a href="{{ route('scholarship.edit', $scholarships->id) }}">Edit</a>
-</body>
-</html>
+@extends('layout.admin.master')
+@section('content')
+    <div class="grid lg gap-6 mt-8">
+
+
+        <div class="card bg-white overflow-hidden">
+            <div class="card overflow-hidden sm:rounded-md rounded-none">
+                <div class="px-6 py-8 flex gap-10">
+                    <div class="mt-6 mb-4">
+                        <img src="{{ asset('/storage/scholarship-images/' . $scholarships->image) }}"
+                            class="h-auto max-w-full" alt="thumbnail">
+                    </div>
+                    <div class="mt-6 mb-4">
+                        <p class="text-dark/75 mb-6 text-xl mt-3">{{ $scholarships->name }}</p>
+                        <div class="grid lg:grid-cols-3 gap-6">
+                            <div class="grid lg:grid-cols-2 gap-6">
+                                <h3>Organizer</h3>
+                                <p>{{ $scholarships->organizer }}</p>
+                                <h3>Description</h3>
+                                <p>{{ $scholarships->description }}</p>
+                                <h3>Start Registration</h3>
+                                <p>{{ $scholarships->start_registration }}</p>
+
+                            </div>
+                            <div class="grid lg:grid-cols-2 gap-6">
+                                <h3>End Registration</h3>
+                                <p>{{ $scholarships->end_registration }}</p>
+                                <h3>Start Scholarship</h3>
+                                <p>{{ $scholarships->start_scholarship }}</p>
+                                <h3>End Scholarship</h3>
+                                <p>{{ $scholarships->end_scholarship }}</p>
+                            </div>
+                            <div class="flex flex-col justify-between">
+                                <a class="btn bg-primary text-white" href="{{ $scholarships->requirement }}"
+                                    target="_blank">View
+                                    Rules</a>
+                                <a class="btn bg-primary text-white"
+                                    href="{{ route('scholarship.delete', $scholarships->id) }}">Delete</a>
+                                <a class="btn bg-primary text-white"
+                                    href="{{ route('scholarship.edit', $scholarships->id) }}">Edit</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+@endsection

@@ -15,8 +15,12 @@ class CompetitionController extends Controller
     public function index()
     {
         $competitions = Competition::all();
+        $winner = Winner::all();
+        //  $competitions = Competition::with('competition_participants')->get();
+        //  $countParticipants = $participants->count();
+
         return view('/admin/competition/index', [
-            'competitions' => $competitions
+            'competitions' => $competitions,
         ]);
     }
 
