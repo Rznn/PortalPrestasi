@@ -1,47 +1,73 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layout.admin.master')
+@section('content')
+    <div class=" gap-6 mt-8">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Create Job</title>
-</head>
+        <div class="flex flex-col gap-6">
+            <div class="card">
+                <div class="p-6">
+                    <h4 class="card-title mb-4">Browser defaults</h4>
+                    <form action="{{ route('work.store') }}" method="post" enctype="multipart/form-data">
+                        @csrf
 
-<body>
-    <h1>Create Job</h1>
-    <form action="{{ route('work.store') }}" method="post" enctype="multipart/form-data">
-        @csrf
-        <label for="job_name">Job Name</label>
-        <input type="text" name="job_name" id="job_name" placeholder="Enter Job Name" required>
+                        <div>
+                            <label for="job_name" class="text-gray-800 text-sm font-medium inline-block mb-2">Job
+                                Name</label>
+                            <input class="form-input" type="text" name="job_name" id="job_name" value="Job Name"
+                                required>
+                        </div>
+                        <div>
+                            <label for="company"
+                                class="text-gray-800 text-sm font-medium inline-block mb-2">Company</label>
+                            <input class="form-input" type="text" name="company" id="company" required>
+                        </div>
 
-        <label for="company">Company</label>
-        <input type="text" name="company" id="company" placeholder="Enter Job Company" required>
+                        <div>
+                            <label for="information"
+                                class="text-gray-800 text-sm font-medium inline-block mb-2">Information's
+                                Link</label>
+                            <input type="url" class="form-input" name="information" id="information" required>
+                        </div>
 
-        <label for="description">Description</label>
-        <textarea name="description" id="description" placeholder="Enter Job Description" cols="30" rows="10"></textarea>
+                        <div>
+                            <label for="contact"
+                                class="text-gray-800 text-sm font-medium inline-block mb-2">Contact</label>
+                            <input class="form-input" type="tel" name="contact" id="contact" required>
+                        </div>
 
-        <label for="information">Job Information's Link</label>
-        <input type="url" name="information" id="information" placeholder="Enter Job Information" required>
+                        <div>
+                            <label for="contact" class="text-gray-800 text-sm font-medium inline-block mb-2">Salary</label>
+                            <input class="form-input" type="number" name="salary" id="salary" required>
+                        </div>
 
-        <label for="image">Company Logo</label>
-        <input type="file" name="image" id="image" required>
+                        <div>
+                            <label for="email" class="text-gray-800 text-sm font-medium inline-block mb-2">Company
+                                Email</label>
+                            <input class="form-input" type="email" name="email" id="email" required>
+                        </div>
 
-        <br>
+                        <div class="col-span-3">
+                            <label for="description"
+                                class="text-gray-800 text-sm font-medium inline-block mb-2">Description</label>
+                            <textarea rows="4" class="form-textarea" name="description" id="description"></textarea>
+                        </div>
 
-        <label for="salary">Salary</label>
-        <input type="number" name="salary" id="salary" placeholder="Enter Job Salary" required>
+                        <div class="col-span-3">
+                            <label for="image" class="text-gray-800 text-sm font-medium inline-block mb-2">Photo</label>
+                            <input type="file" name="image" id="image" class="dropify"
+                                data-default-file="url_of_your_file" />
+                        </div>
 
-        <label for="contact">Contact</label>
-        <input type="tel" name="contact" id="contact" placeholder="Enter Company Contact" required>
+                        <div class="col-span-3 mt-3">
+                            <button type="submit" class="btn bg-primary text-white">Submit</button>
 
-        <label for="email">Company Email</label>
-        <input type="email" name="email" id="email" placeholder="Enter Company Email" required>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        <br>
-
-        <input type="submit" class="button" value="Submit">
-    </form>
-</body>
-
-</html>
+    <script>
+        $('.dropify').dropify();
+    </script>
+@endsection
