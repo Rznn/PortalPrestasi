@@ -19,7 +19,7 @@
         <a href="/" class="ml-5 font-bold">PORTAL PRESTASI</a>
       </div>
       <div class="w-[279px] flex justify-between">
-        <a href="/register" class="btn-secondary bg-transparent border border-black px-[24px] py-[7px] rounded-2xl ml-14">
+        <a href="/register" class="btn-secondary bg-transparent border border-gray-400 px-[24px] py-[7px] rounded-2xl ml-14">
           Sign up
         </a>
         <a href="/login" class="btn-primary border border-black px-[24px] py-[7px] rounded-2xl">
