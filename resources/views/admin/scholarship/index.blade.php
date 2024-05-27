@@ -33,7 +33,7 @@
                                                 Scholarship</th>
                                             <th scope="col" class="px-6 py-3 text-start text-sm text-gray-500">Status
                                             </th>
-                                            <th scope="col" class="px-6 py-3 text-end text-sm text-gray-500">Action</th>
+                                            <th scope="col" class="px-6 py-3 text-start text-sm text-gray-500">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -43,13 +43,13 @@
                                                     {{ $scholarship->id }}</td>
                                                 <td> <img
                                                         src="{{ asset('/storage/scholarship-images/' . $scholarship->image) }}"
-                                                        alt="" style="width: 100px;"></td>
+                                                        alt="" style="width: 70px; height:94px; object-fit:cover;"></td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                                                     {{ $scholarship->name }}
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
                                                     {{ $scholarship->organizer }}</td>
-                                                <td>{{ \Carbon\Carbon::parse($scholarship->end_registration)->format('d-m-Y') }}</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm">{{ \Carbon\Carbon::parse($scholarship->end_registration)->format('d-m-Y') }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                                                     {{ \Carbon\Carbon::parse($scholarship->start_scholarship)->format('d-m-Y') }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
@@ -291,13 +291,13 @@
                                                             @csrf
                                                             <div class="p-4 overflow-y-auto flex flex-col gap-3">
                                                                 @php
-                                                                    $participant =
-                                                                        $scholarship->scholarship_participants;
+                                                                    $participant = $scholarship->scholarship_participants;
+                                                                    $awardee = $scholarship->awardees->pluck('scholarship_participant_id')->toArray();
                                                                 @endphp
                                                                 @foreach ($participant as $participants)
                                                                     <div>
 
-                                                                        <input type="checkbox" name="awardee[]"
+                                                                        <input type="checkbox" name="awardee[]"  {{ in_array($participants->id, $awardee) ? 'checked' : '' }}
                                                                             value="{{ $participants->id }}">
                                                                         <label
                                                                             for="awardee[]">{{ $participants->fullname }}</label>
@@ -329,6 +329,9 @@
                     </div>
                 </div>
             </div> <!-- end card -->
+            <div class="pagination flex justify-end">
+                {{ $scholarships->links() }}
+            </div>
         </div>
 
 

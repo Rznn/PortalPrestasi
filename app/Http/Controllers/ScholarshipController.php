@@ -12,7 +12,7 @@ class ScholarshipController extends Controller
 {
     public function index()
     {
-        $scholarships = Scholarship::all();
+        $scholarships = Scholarship::latest()->simplePaginate(4);
 
         return view('/admin/scholarship/index', [
             'scholarships' => $scholarships

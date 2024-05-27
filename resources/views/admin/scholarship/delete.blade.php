@@ -34,7 +34,7 @@
                                                 Scholarship</th>
                                             <th scope="col" class="px-6 py-3 text-start text-sm text-gray-500">Status
                                             </th>
-                                            <th scope="col" class="px-6 py-3 text-end text-sm text-gray-500">Action</th>
+                                            <th scope="col" class="px-6 py-3 text-start text-sm text-gray-500">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -44,7 +44,7 @@
                                                     {{ $scholarship->id }}</td>
                                                 <td> <img
                                                         src="{{ asset('/storage/scholarship-images/' . $scholarship->image) }}"
-                                                        alt="" style="width: 100px;"></td>
+                                                        alt="" style="width: 70px; height:94px; object-fit:cover;"></td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                                                     {{ $scholarship->name }}
                                                 </td>
@@ -57,7 +57,7 @@
                                                     {{ $scholarship->status }}</td>
                                                 <td>
                                                     <a type="button"
-                                                       class="hs-dropdown-toggle btn bg-primary text-white text-xs"
+                                                       class="hs-dropdown-toggle btn bg-primary text-white text-xs px-5"
                                                        href="{{ route('scholarship.restore', $scholarship->id) }}">
                                                        Restore
                                                     </a>

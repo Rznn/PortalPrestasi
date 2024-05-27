@@ -10,7 +10,7 @@ class WorkController extends Controller
 {
     public function index()
     {
-        $works = Work::all();
+        $works = Work::latest()->simplePaginate(5);
         return view('/admin/work/index', [
             'works' => $works
         ]);

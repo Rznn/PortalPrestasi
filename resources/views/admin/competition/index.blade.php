@@ -34,7 +34,7 @@
                                                 Competition</th>
                                             <th scope="col" class="px-6 py-3 text-start text-sm text-gray-500">Status
                                             </th>
-                                            <th scope="col" class="px-6 py-3 text-end text-sm text-gray-500">Action</th>
+                                            <th scope="col" class="px-6 py-3 text-start text-sm text-gray-500">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -44,13 +44,13 @@
                                                     {{ $competition->id }}</td>
                                                 <td> <img
                                                         src="{{ asset('/storage/competition-images/' . $competition->image) }}"
-                                                        alt="" style="width: 100px;"></td>
+                                                        alt="" style="width: 70px; height:94px; object-fit:cover;"></td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                                                     {{ $competition->name }}
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
                                                     {{ $competition->organizer }}</td>
-                                                <td>{{ \Carbon\Carbon::parse($competition->end_registration)->format('d-m-Y') }}</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm">{{ \Carbon\Carbon::parse($competition->end_registration)->format('d-m-Y') }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                                                     {{ \Carbon\Carbon::parse($competition->start_competition)->format('d-m-Y') }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
@@ -347,6 +347,10 @@
                                                             <div class="p-4 overflow-y-auto flex flex-col gap-3">
                                                                 @php
                                                                     $participant = $competition->competition_participants;
+                                                                    $winner = $competition->winners;
+                                                                    $pos1 = $winner->where('position', '1')->first();
+                                                                    $pos2 = $winner->where('position', '2')->first();
+                                                                    $pos3 = $winner->where('position', '3')->first();
                                                                     $countParticipants = $participant->count();
                                                                 @endphp
 
@@ -356,6 +360,7 @@
                                                                     <label for="winner1">Juara 1</label>
                                                                     <select class="form-select" name="winner1"
                                                                         id="winner1">
+                                                                        <option value="{{$pos1->competition_participants->id}}" class="bg-secondary text-white">Current: {{$pos1->competition_participants->fullname}}</option>
                                                                         @foreach ($participant as $p)
                                                                             <option value="{{ $p->id }}">
                                                                                 {{ $p->fullname }}
@@ -366,6 +371,7 @@
                                                                     <label for="winner1">Juara 1</label>
                                                                     <select class="form-select" name="winner1"
                                                                         id="winner1">
+                                                                        <option value="{{$pos1->competition_participants->id}}" class="bg-secondary text-white">Current: {{$pos1->competition_participants->fullname}}</option>
                                                                         @foreach ($participant as $p)
                                                                             <option value="{{ $p->id }}">
                                                                                 {{ $p->fullname }}
@@ -375,6 +381,7 @@
                                                                     <label for="winner2">Juara 2</label>
                                                                     <select class="form-select" name="winner2"
                                                                         id="winner2">
+                                                                        <option value="{{$pos2->competition_participants->id}}" class="bg-secondary text-white">Current: {{$pos2->competition_participants->fullname}}</option>
                                                                         @foreach ($participant as $p)
                                                                             <option value="{{ $p->id }}">
                                                                                 {{ $p->fullname }}
@@ -382,9 +389,10 @@
                                                                         @endforeach
                                                                     </select>
                                                                 @else
-                                                                    <label for="winner1">Juara 1</label>
+                                                                    <label for="winner1">Juara 1 </label>
                                                                     <select class="form-select" name="winner1"
                                                                         id="winner1">
+                                                                        <option value="{{$pos1->competition_participants->id}}" class="bg-secondary text-white">Current: {{$pos1->competition_participants->fullname}}</option>
                                                                         @foreach ($participant as $p)
                                                                             <option value="{{ $p->id }}">
                                                                                 {{ $p->fullname }}
@@ -394,6 +402,7 @@
                                                                     <label for="winner2">Juara 2</label>
                                                                     <select class="form-select" name="winner2"
                                                                         id="winner2">
+                                                                        <option value="{{$pos2->competition_participants->id}}" class="bg-secondary text-white">Current: {{$pos2->competition_participants->fullname}}</option>
                                                                         @foreach ($participant as $p)
                                                                             <option value="{{ $p->id }}">
                                                                                 {{ $p->fullname }}
@@ -403,6 +412,7 @@
                                                                     <label for="winner3">Juara 3</label>
                                                                     <select class="form-select" name="winner3"
                                                                         id="winner3">
+                                                                        <option value="{{$pos3->competition_participants->id}}" class="bg-secondary text-white">Current: {{$pos3->competition_participants->fullname}}</option>
                                                                         @foreach ($participant as $p)
                                                                             <option value="{{ $p->id }}">
                                                                                 {{ $p->fullname }}
@@ -439,6 +449,9 @@
                     </div>
                 </div>
             </div> <!-- end card -->
+            <div class="pagination flex justify-end">
+                {{ $competitions->links() }}
+            </div>
         </div>
 
 

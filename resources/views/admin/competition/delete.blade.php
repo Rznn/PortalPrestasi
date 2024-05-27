@@ -35,7 +35,7 @@
                                                 Competition</th>
                                             <th scope="col" class="px-6 py-3 text-start text-sm text-gray-500">Status
                                             </th>
-                                            <th scope="col" class="px-6 py-3 text-end text-sm text-gray-500">Action</th>
+                                            <th scope="col" class="px-6 py-3 text-start text-sm text-gray-500">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -45,20 +45,20 @@
                                                     {{ $competition->id }}</td>
                                                 <td> <img
                                                         src="{{ asset('/storage/competition-images/' . $competition->image) }}"
-                                                        alt="" style="width: 100px;"></td>
+                                                        alt="" style="width: 70px; height:94px; object-fit:cover;"></td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                                                     {{ $competition->name }}
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
                                                     {{ $competition->organizer }}</td>
-                                                <td>{{ $competition->end_registration }}</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $competition->end_registration }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                                                     {{ $competition->start_competition }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                                                     {{ $competition->status }}</td>
                                                 <td>
                                                     <a type="button"
-                                                        class="hs-dropdown-toggle btn bg-primary text-white text-xs"
+                                                        class="hs-dropdown-toggle btn bg-primary text-white text-xs px-5"
                                                         href="{{ route('competition.restore', $competition->id) }}">
                                                         Restore
                                                     </a>

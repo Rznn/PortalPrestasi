@@ -29,7 +29,7 @@
                                             <th scope="col" class="px-6 py-3 text-start text-sm text-gray-500">Email</th>
                                             <th scope="col" class="px-6 py-3 text-start text-sm text-gray-500">Salary
                                             </th>
-                                            <th scope="col" class="px-6 py-3 text-end text-sm text-gray-500">Action</th>
+                                            <th scope="col" class="px-6 py-3 text-start text-sm text-gray-500">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -37,8 +37,8 @@
                                             <tr class="odd:bg-white even:bg-gray-100 hover:bg-gray-100">
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                                                     {{ $work->id }}</td>
-                                                <td> <img src="{{ asset('/storage/work-images/' . $work->image) }}"
-                                                        alt="" style="width: 100px;"></td>
+                                                <td class="flex ms-2"> <img src="{{ asset('/storage/work-images/' . $work->image) }}"
+                                                        alt="" style="width: 60px; height:60px; object-fit:cover; text-align:center;"></td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                                                     {{ $work->job_name }}
                                                 </td>
@@ -79,6 +79,9 @@
                     </div>
                 </div>
             </div> <!-- end card -->
+            <div class="pagination flex justify-end">
+                {{ $works->links() }}
+            </div>
         </div>
 
 

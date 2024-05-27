@@ -14,7 +14,7 @@ class CompetitionController extends Controller
 {
     public function index()
     {
-        $competitions = Competition::all();
+        $competitions = Competition::latest()->simplePaginate(4);
         $winners = Winner::all();
         //  $competitions = Competition::with('competition_participants')->get();
         //  $countParticipants = $participants->count();
