@@ -168,11 +168,13 @@
                     {{ $competition->organizer }}
                   </td>
                   <td class="text-sm text-slate-900 px-6 py-4 whitespace-nowrap">
-                    Date
+                    {{ $competition->competition_participants->created_at }}
                   </td>
                   <td class="text-sm text-slate-900 px-6 py-4 whitespace-nowrap">
-                      <a href="" class="btn-secondary px-3 py-2  border border-gray-400 rounded-xl">Details</a>
-                    <a href="" class="btn-primary px-3 py-2 text-white rounded-xl">Unenroll</a>
+                      <a href="{{ route('user.competition.details', $competition->id) }}" class="btn-secondary px-3 py-2  border border-gray-400 rounded-xl">Details</a>
+                      @if ($competition->status == 'register')
+                      <a href="" class="btn-primary px-3 py-2 text-white rounded-xl">Unenroll</a>
+                      @endif
                   </td>
                 </tr>
               </tbody>
@@ -182,43 +184,54 @@
           @endif
 
           @if ($scholarships->isNotEmpty())
+          @foreach ($scholarships as $scholarship)
           <div class="overflow-hidden mt-24">
             <h3 class="font-medium mb-4 text-center text-xl">Scholarship Activity</h3>
             <table class="min-w-full">
-              <thead class="bg-white border-t border-b border-slate-400">
-                <tr>
-                  <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                    #
-                  </th>
-                  <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                    First
-                  </th>
-                  <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                    Last
-                  </th>
-                  <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                    Handle
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="bg-white border-b">
-                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                    {{-- {{ $loop->iteration }} --}}
-                  </td>
-                  <td class="text-sm text-slate-900 px-6 py-4 whitespace-nowrap">
-                    Mark
-                  </td>
-                  <td class="text-sm text-slate-900 px-6 py-4 whitespace-nowrap">
-                    Otto
-                  </td>
-                  <td class="text-sm text-slate-900 px-6 py-4 whitespace-nowrap">
-                    @mdo
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+                <thead class="bg-white border-t border-b border-slate-400">
+                  <tr>
+                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                      #Id
+                    </th>
+                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                      Competition Name
+                    </th>
+                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                      Competition Organizer
+                    </th>
+                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                      Enrollment Date
+                    </th>
+                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                      Action
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="bg-white border-b">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      #{{ $loop->iteration }}
+                    </td>
+                    <td class="text-sm text-slate-900 px-6 py-4 whitespace-nowrap">
+                      {{ $scholarship->name }}
+                    </td>
+                    <td class="text-sm text-slate-900 px-6 py-4 whitespace-nowrap">
+                      {{ $scholarship->organizer }}
+                    </td>
+                    <td class="text-sm text-slate-900 px-6 py-4 whitespace-nowrap">
+                      Date
+                    </td>
+                    <td class="text-sm text-slate-900 px-6 py-4 whitespace-nowrap">
+                        <a href="{{ route('user.scholarship.details', $scholarship->id) }}" class="btn-secondary px-3 py-2  border border-gray-400 rounded-xl">Details</a>
+                        @if ($scholarship->status == 'register')
+                        <a href="" class="btn-primary px-3 py-2 text-white rounded-xl">Unenroll</a>
+                        @endif
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
           </div>
+          @endforeach
           @endif
         </div>
       </div>
