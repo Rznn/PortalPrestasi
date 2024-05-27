@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Work;
 use App\Models\Competition;
 use App\Models\Scholarship;
 use Illuminate\Http\Request;
@@ -13,7 +14,14 @@ class UserController extends Controller
 {
     public function dashboard()
     {
-        return view('/user/dashboard');
+        $competitions = Competition::latest()->limit(3)->get();
+        $scholarships = Scholarship::latest()->limit(3)->get();
+        $works = Work::latest()->limit(6)->get();
+        return view('/user/dashboard', [
+            'competitions' => $competitions,
+            'scholarships' => $scholarships,
+            'works' => $works,
+        ]);
     }
 
     public function activity()
