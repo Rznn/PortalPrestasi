@@ -137,7 +137,7 @@
       </div>
       <div class="flex flex-row my-24">
         <img src="{{asset('assets/images/arrow.png')}}" class="w-[70px] h-[70px] -my-3 mx-20">
-        <a href="login.html" class="font-semibold text-5xl hover-underline">Don't Miss Out!</a>
+        <a href="/login" class="font-semibold text-5xl hover-underline">Don't Miss Out!</a>
         <img src="{{asset('assets/images/arrow.png')}}" class="w-[70px] h-[70px] -my-3 scale-x-[-1] mx-20">
       </div>
     </div>
