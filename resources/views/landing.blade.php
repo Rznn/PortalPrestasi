@@ -22,7 +22,7 @@
         <a href="/register" class="btn-secondary bg-transparent border border-gray-400 px-[24px] py-[7px] rounded-2xl ml-14">
           Sign up
         </a>
-        <a href="/login" class="btn-primary border border-black px-[24px] py-[7px] rounded-2xl">
+        <a href="/login" class="btn-primary border border-gray-500 px-[24px] py-[7px] rounded-2xl">
           <p class="text-white">Sign in</p>
         </a>
       </div>
@@ -101,11 +101,11 @@
       <div class="mb-4 lg:mb-0 px-10">
         <h3 class="text-xl font-semibold mb-4">PORTAL PRESTASI</h3>
         <div class="flex flex-row justify-center">
-          <a href="http://wa.me/6281311208474"><img src="assets/images/whatsapp.png" class="w-7"></a>
-          <div class="w-0.5 h-7 bg-gray-200 mx-2"></div>
-          <a href="http://instagram.com"><img src="assets/images/instagram.png" class="w-7"></a>
-          <div class="w-0.5 h-7 bg-gray-200 mx-2"></div>
-          <a href="http://gmail.com"><img src="assets/images/gmail.png" class="w-7"></a>
+            <a href="http://wa.me/6281311208474"><img src="{{asset('assets/images/whatsapp.png')}}" class="w-7"></a>
+            <div class="w-0.5 h-7 bg-gray-200 mx-2"></div>
+            <a href="http://instagram.com"><img src="{{asset('assets/images/instagram.png')}}" class="w-7"></a>
+            <div class="w-0.5 h-7 bg-gray-200 mx-2"></div>
+            <a href="http://gmail.com"><img src="{{asset('assets/images/gmail.png')}}" class="w-7"></a>
         </div>
 
       </div>

@@ -9,7 +9,7 @@ class UserWorkController extends Controller
 {
     public function index()
     {
-        $works = Work::all();
+        $works = Work::latest()->get();
         return view('/user/work/index', [
             'works' => $works
         ]);

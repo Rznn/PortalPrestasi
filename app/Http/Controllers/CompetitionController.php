@@ -16,7 +16,7 @@ class CompetitionController extends Controller
     {
         $competitions = Competition::latest()->simplePaginate(4);
         $winners = Winner::all();
-        //  $competitions = Competition::with('competition_participants')->get();
+        // $competitions = Competition::with('competition_participants')->get();
         //  $countParticipants = $participants->count();
 
         return view('/admin/competition/index', [
@@ -178,11 +178,29 @@ class CompetitionController extends Controller
     public function selectwinner(Request $request, $id)
     {
         $competitions = Competition::findOrFail($id);
-        $request->validate([
-            'winner1' => 'required',
-            'winner2' => 'required',
-            'winner3' => 'required',
-        ]);
+
+        $participants = $competitions->competition_participants;
+        $countParticipants = $participants->count();
+
+        $validationRules = [];
+
+        if ($countParticipants == 1) {
+            $validationRules['winner1'] = 'required';
+        }
+        if ($countParticipants == 2) {
+            $validationRules['winner2'] = 'required|different:winner1';
+        }
+        if ($countParticipants == 3) {
+            $validationRules['winner1'] = 'required|different:winner2,winner3';
+            $validationRules['winner2'] = 'required|different:winner1,winner3';
+            $validationRules['winner3'] = 'required|different:winner1,winner2';
+        }
+
+        try {
+            $request->validate($validationRules);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return redirect()->back()->withErrors($e->errors());
+        }
 
         if ($request->winner1){
             $winners1 = new Winner();
@@ -214,11 +232,29 @@ class CompetitionController extends Controller
     public function editwinner(Request $request, $id)
     {
         $competitions = Competition::findOrFail($id);
-        $request->validate([
-            'winner1' => 'required',
-            'winner2' => 'required',
-            'winner3' => 'required',
-        ]);
+
+        $participants = $competitions->competition_participants;
+        $countParticipants = $participants->count();
+
+        $validationRules = [];
+
+        if ($countParticipants == 1) {
+            $validationRules['winner1'] = 'required';
+        }
+        if ($countParticipants == 2) {
+            $validationRules['winner2'] = 'required|different:winner1';
+        }
+        if ($countParticipants == 3) {
+            $validationRules['winner1'] = 'required|different:winner2,winner3';
+            $validationRules['winner2'] = 'required|different:winner1,winner3';
+            $validationRules['winner3'] = 'required|different:winner1,winner2';
+        }
+
+        try {
+            $request->validate($validationRules);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return redirect()->back()->withErrors($e->errors());
+        }
 
         // Hapus pemenang dengan posisi 1, 2, dan 3 untuk kompetisi ini
         Winner::where('competition_id', $competitions->id)

@@ -54,7 +54,16 @@
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                                                     {{ $scholarship->start_scholarship }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                                                    {{ $scholarship->status }}</td>
+                                                    @if ($scholarship->status == 'upcoming')
+                                                    <span class="px-2 py-1 bg-primary/10 text-primary text-xs rounded">Up Coming</span>
+                                                    @elseif ($scholarship->status == 'registration')
+                                                    <span class="px-2 py-1 bg-success/10 text-success text-xs rounded">Registration</span>
+                                                    @elseif ($scholarship->status == 'ongoing')
+                                                    <span class="px-2 py-1 bg-warning/10 text-warning text-xs rounded">On Going</span>
+                                                    @else
+                                                    <span class="px-2 py-1 bg-secondary/10 text-secondary text-xs rounded">Finished</span>
+                                                    @endif
+                                                </td>
                                                 <td>
                                                     <a type="button"
                                                        class="hs-dropdown-toggle btn bg-primary text-white text-xs px-5"
@@ -75,4 +84,10 @@
 
 
     </main>
+    @if ($errors->any())
+    <script>
+        var errorMessage = @json($errors->all());
+        alert(errorMessage.join('\n'));
+    </script>
+    @endif
 @endsection

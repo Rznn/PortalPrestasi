@@ -26,5 +26,11 @@
         @endif
         <button type="submit">Submit</button>
     </form>
+    @if ($errors->any())
+    <script>
+        var errorMessage = @json($errors->all());
+        alert(errorMessage.join('\n'));
+    </script>
+    @endif
 </body>
 </html>

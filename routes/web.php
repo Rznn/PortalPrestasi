@@ -107,6 +107,9 @@ Route::group(['middleware' => 'nologin'], function () {
         // user competition registration
         Route::get('/competition/{id}/registration', [UserCompetitionController::class, 'registration'])->name('user.competition.enroll');
         Route::post('/competition/{id}/registration', [UserCompetitionController::class, 'store'])->name('user.competition.store');
+        Route::get('/competition/{id}/unenroll', [UserCompetitionController::class, 'unenroll'])->name('user.competition.unenroll');
+        // user competition details
+        Route::get('/competition/{id}/participants', [UserCompetitionController::class, 'participant'])->name('user.competition.participant');
 
         // user scholarship index
         Route::get('/scholarship', [UserScholarshipController::class, 'index'])->name('user.scholarship.index');
@@ -115,6 +118,9 @@ Route::group(['middleware' => 'nologin'], function () {
         // user scholarship registration
         Route::get('/scholarship/{id}/registration', [UserScholarshipController::class, 'registration'])->name('user.scholarship.enroll');
         Route::post('/scholarship/{id}/registration', [UserScholarshipController::class, 'store'])->name('user.scholarship.store');
+        Route::get('/scholarship/{id}/unenroll', [UserScholarshipController::class, 'unenroll'])->name('user.scholarship.unenroll');
+        // user scholarship details
+        Route::get('/scholarship/{id}/participants', [UserScholarshipController::class, 'participant'])->name('user.scholarship.participant');
 
         // user work index
         Route::get('/job-vacancies', [UserWorkController::class, 'index'])->name('user.work.index');

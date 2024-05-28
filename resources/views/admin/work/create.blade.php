@@ -70,4 +70,10 @@
     <script>
         $('.dropify').dropify();
     </script>
+     @if ($errors->any())
+     <script>
+         var errorMessage = @json($errors->all());
+         alert(errorMessage.join('\n'));
+     </script>
+     @endif
 @endsection

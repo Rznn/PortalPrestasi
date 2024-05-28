@@ -23,8 +23,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Home | Portal Prestasi</title>
   <link rel="icon" type="image/png" href="{{ asset('assets/images/logofix.png') }}" />
-  <link rel="stylesheet" href="assets/css/style.css" />
-  <link rel="stylesheet" href="assets/css/colors.css" />
+  <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" />
+  <link rel="stylesheet" href="{{ asset('assets/css/colors.css') }}" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 </head>
@@ -63,7 +63,7 @@
   </section>
 
   <!-- LIST -->
-  <section id="dashboard-list" class="py-[140px] scroll-behavior:smooth">
+  <section id="dashboard-list" class="py-[140px] scroll-behavior:smooth flex items-center justify-center w-full">
     <div class="container">
 
       <!-- COMPETITIONS -->
@@ -111,9 +111,9 @@
             @foreach ($works as $work)
             <div class="cardview-4 flex flex-row rounded-2xl mb-8" data-aos="fade-up">
               <div class="px-10 py-8 flex items-center">
-                <a href="{{$work->information}}" target="_blank"  class="image-container-2"><img src="{{ asset('storage/work-images/' . $work->image) }}" class="img-list-hover h-[140px] w-[140px]" style="object-fit: cover"></a>
+                <a href="{{$work->information}}" target="_blank"  class="image-container-2"><img src="{{ asset('storage/work-images/' . $work->image) }}" class="img-list-hover h-[120px] w-[120px] mt-3" style="object-fit: cover"></a>
                 <div class="ml-10">
-                  <p class="font-semibold mt-6">{{ $work->job_name }}</p>
+                  <p class="font-semibold mt-1">{{ $work->job_name }}</p>
                   <p class="italic">{{ $work->company }}</p>
                 </div>
               </div>
@@ -134,11 +134,11 @@
       <div class="mb-4 lg:mb-0 px-10">
         <h3 class="text-xl font-semibold mb-4">PORTAL PRESTASI</h3>
         <div class="flex flex-row justify-center">
-          <a href="http://wa.me/6281311208474"><img src="assets/images/whatsapp.png" class="w-7"></a>
-          <div class="w-0.5 h-7 bg-gray-200 mx-2"></div>
-          <a href="http://instagram.com"><img src="assets/images/instagram.png" class="w-7"></a>
-          <div class="w-0.5 h-7 bg-gray-200 mx-2"></div>
-          <a href="http://gmail.com"><img src="assets/images/gmail.png" class="w-7"></a>
+            <a href="http://wa.me/6281311208474"><img src="{{asset('assets/images/whatsapp.png')}}" class="w-7"></a>
+            <div class="w-0.5 h-7 bg-gray-200 mx-2"></div>
+            <a href="http://instagram.com"><img src="{{asset('assets/images/instagram.png')}}" class="w-7"></a>
+            <div class="w-0.5 h-7 bg-gray-200 mx-2"></div>
+            <a href="http://gmail.com"><img src="{{asset('assets/images/gmail.png')}}" class="w-7"></a>
         </div>
 
       </div>

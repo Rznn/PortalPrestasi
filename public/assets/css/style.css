@@ -128,8 +128,8 @@ nav {
 
 /* COMPETITIONS */
 .cardview-3{
-  height: 500px;
-  width: 70%;
+  /* height: 500px; */
+
   background-color: #d6dce5;
   box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.15);
 }

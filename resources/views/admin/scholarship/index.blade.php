@@ -53,7 +53,16 @@
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                                                     {{ \Carbon\Carbon::parse($scholarship->start_scholarship)->format('d-m-Y') }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                                                    {{ $scholarship->status }}</td>
+                                                    @if ($scholarship->status == 'upcoming')
+                                                    <span class="px-2 py-1 bg-primary/10 text-primary text-xs rounded">Up Coming</span>
+                                                    @elseif ($scholarship->status == 'registration')
+                                                    <span class="px-2 py-1 bg-success/10 text-success text-xs rounded">Registration</span>
+                                                    @elseif ($scholarship->status == 'ongoing')
+                                                    <span class="px-2 py-1 bg-warning/10 text-warning text-xs rounded">On Going</span>
+                                                    @else
+                                                    <span class="px-2 py-1 bg-secondary/10 text-secondary text-xs rounded">Finished</span>
+                                                    @endif
+                                                </td>
                                                 <td>
                                                     <div class="hs-dropdown relative">
                                                         <button type="button"
@@ -81,6 +90,9 @@
                                                                     href="{{ route('scholarship.toongoing', $scholarship->id) }}">Change
                                                                     to Start
                                                                     Scholarship</a>
+                                                                <a data-hs-overlay="#hs-slide-up-animation-modal{{ $scholarship->id }}"
+                                                                    class="flex items-center gap-x-3.5 py-2 px-3 text-sm text-gray-800 hover:bg-gray-100"href="#">View
+                                                                    Participants</a>
                                                             @elseif ($scholarship->status == 'ongoing')
                                                                 <a class="flex items-center gap-x-3.5 py-2 px-3 text-sm text-gray-800 hover:bg-gray-100"
                                                                     href="{{ route('scholarship.detail', $scholarship->id) }}">Details</a>
@@ -88,6 +100,9 @@
                                                                     href="{{ route('scholarship.tofinished', $scholarship->id) }}">Change
                                                                     to Finish
                                                                     Scholarship</a>
+                                                                <a data-hs-overlay="#hs-slide-up-animation-modal{{ $scholarship->id }}"
+                                                                    class="flex items-center gap-x-3.5 py-2 px-3 text-sm text-gray-800 hover:bg-gray-100"href="#">View
+                                                                    Participants</a>
                                                             @else
                                                                 <a class="flex items-center gap-x-3.5 py-2 px-3 text-sm text-gray-800 hover:bg-gray-100"
                                                                     href="{{ route('scholarship.detail', $scholarship->id) }}">Details</a>
@@ -332,4 +347,10 @@
 
 
     </main>
+    @if ($errors->any())
+    <script>
+        var errorMessage = @json($errors->all());
+        alert(errorMessage.join('\n'));
+    </script>
+    @endif
 @endsection

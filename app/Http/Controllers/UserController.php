@@ -28,19 +28,21 @@ class UserController extends Controller
     {
         $users = Auth::user();
 
-        $competitionParticipants = CompetitionParticipant::where('user_id', $users->id)->with('competitions')->get();
+        $competitionParticipants = CompetitionParticipant::where('user_id', $users->id)->with('competitions')->latest()->get();
         $competitions = $competitionParticipants->map(function ($participant) {
             return $participant->competitions;
         });
 
-        $scholarshipParticipants = ScholarshipParticipant::where('user_id', $users->id)->with('scholarships')->get();
+        $scholarshipParticipants = ScholarshipParticipant::where('user_id', $users->id)->with('scholarships')->latest()->get();
         $scholarships = $scholarshipParticipants->map(function ($participant) {
             return $participant->scholarships;
         });
 
         return view('/user/activity/index', [
             'competitions' => $competitions,
+            'competitionParticipants' => $competitionParticipants,
             'scholarships' => $scholarships,
+            'scholarshipParticipants' => $scholarshipParticipants,
         ]);
     }
 }

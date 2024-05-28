@@ -54,7 +54,16 @@
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                                                     {{ \Carbon\Carbon::parse($competition->start_competition)->format('d-m-Y') }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                                                    {{ $competition->status }}</td>
+                                                    @if ($competition->status == 'upcoming')
+                                                    <span class="px-2 py-1 bg-primary/10 text-primary text-xs rounded">Up Coming</span>
+                                                    @elseif ($competition->status == 'registration')
+                                                    <span class="px-2 py-1 bg-success/10 text-success text-xs rounded">Registration</span>
+                                                    @elseif ($competition->status == 'ongoing')
+                                                    <span class="px-2 py-1 bg-warning/10 text-warning text-xs rounded">On Going</span>
+                                                    @else
+                                                    <span class="px-2 py-1 bg-secondary/10 text-secondary text-xs rounded">Finished</span>
+                                                    @endif
+                                                </td>
                                                 <td>
                                                     <div class="hs-dropdown relative">
                                                         <button type="button"
@@ -82,6 +91,9 @@
                                                                     href="{{ route('competition.toongoing', $competition->id) }}">Change
                                                                     to Start
                                                                     Competition</a>
+                                                                <a data-hs-overlay="#hs-slide-up-animation-modal{{ $competition->id }}"
+                                                                    class="flex items-center gap-x-3.5 py-2 px-3 text-sm text-gray-800 hover:bg-gray-100"href="#">View
+                                                                    Participant</a>
                                                             @elseif ($competition->status == 'ongoing')
                                                                 <a class="flex items-center gap-x-3.5 py-2 px-3 text-sm text-gray-800 hover:bg-gray-100"
                                                                     href="{{ route('competition.detail', $competition->id) }}">Details</a>
@@ -89,6 +101,9 @@
                                                                     href="{{ route('competition.tofinished', $competition->id) }}">Change
                                                                     to Finish
                                                                     Competition</a>
+                                                                <a data-hs-overlay="#hs-slide-up-animation-modal{{ $competition->id }}"
+                                                                    class="flex items-center gap-x-3.5 py-2 px-3 text-sm text-gray-800 hover:bg-gray-100"href="#">View
+                                                                    Participant</a>
                                                             @else
                                                                 <a class="flex items-center gap-x-3.5 py-2 px-3 text-sm text-gray-800 hover:bg-gray-100"
                                                                     href="{{ route('competition.detail', $competition->id) }}">Details</a>
@@ -263,7 +278,7 @@
                                                             </button>
                                                         </div>
                                                         @php
-                                                            $winner = $competition->winners;
+                                                            $winner = $competition->winners->sortBy('position');
                                                         @endphp
                                                         @if ($winner->isNotEmpty())
                                                             <div class="grid grid-cols-3 p-4 overflow-y-auto flex gap-3">
@@ -351,72 +366,83 @@
                                                                 @endphp
 
                                                                 @if ($countParticipants == 0)
-                                                                    <p>Tidak Ada Participant</p>
+                                                                <p>Tidak Ada Participant</p>
                                                                 @elseif($countParticipants == 1)
-                                                                    <label for="winner1">Juara 1</label>
-                                                                    <select class="form-select" name="winner1"
-                                                                        id="winner1">
+                                                                <label for="winner1">Juara 1</label>
+                                                                <select class="form-select" name="winner1"
+                                                                    id="winner1">
+                                                                    @if($pos1)
                                                                         <option value="{{$pos1->competition_participants->id}}" class="bg-secondary text-white">Current: {{$pos1->competition_participants->fullname}}</option>
-                                                                        @foreach ($participant as $p)
-                                                                            <option value="{{ $p->id }}">
-                                                                                {{ $p->fullname }}
-                                                                            </option>
-                                                                        @endforeach
-                                                                    </select>
+                                                                    @endif
+                                                                    @foreach ($participant as $p)
+                                                                        <option value="{{ $p->id }}">
+                                                                            {{ $p->fullname }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>
                                                                 @elseif($countParticipants == 2)
-                                                                    <label for="winner1">Juara 1</label>
-                                                                    <select class="form-select" name="winner1"
-                                                                        id="winner1">
+                                                                <label for="winner1">Juara 1</label>
+                                                                <select class="form-select" name="winner1"
+                                                                    id="winner1">
+                                                                    @if($pos1)
                                                                         <option value="{{$pos1->competition_participants->id}}" class="bg-secondary text-white">Current: {{$pos1->competition_participants->fullname}}</option>
-                                                                        @foreach ($participant as $p)
-                                                                            <option value="{{ $p->id }}">
-                                                                                {{ $p->fullname }}
-                                                                            </option>
-                                                                        @endforeach
-                                                                    </select>
-                                                                    <label for="winner2">Juara 2</label>
-                                                                    <select class="form-select" name="winner2"
-                                                                        id="winner2">
+                                                                    @endif
+                                                                    @foreach ($participant as $p)
+                                                                        <option value="{{ $p->id }}">
+                                                                            {{ $p->fullname }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>
+                                                                <label for="winner2">Juara 2</label>
+                                                                <select class="form-select" name="winner2"
+                                                                    id="winner2">
+                                                                    @if($pos2)
                                                                         <option value="{{$pos2->competition_participants->id}}" class="bg-secondary text-white">Current: {{$pos2->competition_participants->fullname}}</option>
-                                                                        @foreach ($participant as $p)
-                                                                            <option value="{{ $p->id }}">
-                                                                                {{ $p->fullname }}
-                                                                            </option>
-                                                                        @endforeach
-                                                                    </select>
+                                                                    @endif
+                                                                    @foreach ($participant as $p)
+                                                                        <option value="{{ $p->id }}">
+                                                                            {{ $p->fullname }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>
                                                                 @else
-                                                                    <label for="winner1">Juara 1 </label>
-                                                                    <select class="form-select" name="winner1"
-                                                                        id="winner1">
+                                                                <label for="winner1">Juara 1 </label>
+                                                                <select class="form-select" name="winner1"
+                                                                    id="winner1">
+                                                                    @if($pos1)
                                                                         <option value="{{$pos1->competition_participants->id}}" class="bg-secondary text-white">Current: {{$pos1->competition_participants->fullname}}</option>
-                                                                        @foreach ($participant as $p)
-                                                                            <option value="{{ $p->id }}">
-                                                                                {{ $p->fullname }}
-                                                                            </option>
-                                                                        @endforeach
-                                                                    </select>
-                                                                    <label for="winner2">Juara 2</label>
-                                                                    <select class="form-select" name="winner2"
-                                                                        id="winner2">
+                                                                    @endif
+                                                                    @foreach ($participant as $p)
+                                                                        <option value="{{ $p->id }}">
+                                                                            {{ $p->fullname }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>
+                                                                <label for="winner2">Juara 2</label>
+                                                                <select class="form-select" name="winner2"
+                                                                    id="winner2">
+                                                                    @if($pos2)
                                                                         <option value="{{$pos2->competition_participants->id}}" class="bg-secondary text-white">Current: {{$pos2->competition_participants->fullname}}</option>
-                                                                        @foreach ($participant as $p)
-                                                                            <option value="{{ $p->id }}">
-                                                                                {{ $p->fullname }}
-                                                                            </option>
-                                                                        @endforeach
-                                                                    </select>
-                                                                    <label for="winner3">Juara 3</label>
-                                                                    <select class="form-select" name="winner3"
-                                                                        id="winner3">
+                                                                    @endif
+                                                                    @foreach ($participant as $p)
+                                                                        <option value="{{ $p->id }}">
+                                                                            {{ $p->fullname }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>
+                                                                <label for="winner3">Juara 3</label>
+                                                                <select class="form-select" name="winner3"
+                                                                    id="winner3">
+                                                                    @if($pos3)
                                                                         <option value="{{$pos3->competition_participants->id}}" class="bg-secondary text-white">Current: {{$pos3->competition_participants->fullname}}</option>
-                                                                        @foreach ($participant as $p)
-                                                                            <option value="{{ $p->id }}">
-                                                                                {{ $p->fullname }}
-                                                                            </option>
-                                                                        @endforeach
-                                                                    </select>
+                                                                    @endif
+                                                                    @foreach ($participant as $p)
+                                                                        <option value="{{ $p->id }}">
+                                                                            {{ $p->fullname }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>
                                                                 @endif
-
                                                             </div>
                                                             <div
                                                                 class="flex justify-end items-center gap-x-2 py-3 px-4 border-t">
@@ -452,5 +478,11 @@
 
 
     </main>
+    @if ($errors->any())
+    <script>
+        var errorMessage = @json($errors->all());
+        alert(errorMessage.join('\n'));
+    </script>
+    @endif
 
 @endsection
