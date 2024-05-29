@@ -77,7 +77,7 @@ class WorkController extends Controller
             'company' => 'required',
             'description' => 'required',
             'information' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,webp',
             'contact' => 'required',
             'email' => 'required',
             'salary' => 'required',
@@ -98,7 +98,6 @@ class WorkController extends Controller
         $works->company = $request->company;
         $works->description = $request->description;
         $works->information = $request->information;
-        $works->image = $newName;
         $works->contact = $request->contact;
         $works->email = $request->email;
         $works->salary = $request->salary;
