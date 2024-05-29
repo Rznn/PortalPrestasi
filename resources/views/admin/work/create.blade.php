@@ -13,7 +13,7 @@
                         <div>
                             <label for="job_name" class="text-gray-800 text-sm font-medium inline-block mb-2">Job
                                 Name</label>
-                            <input class="form-input" type="text" name="job_name" id="job_name" value="Job Name" placeholder="Enter Job Name" required>
+                            <input class="form-input" type="text" name="job_name" id="job_name" placeholder="Enter Job Name" required>
                         </div>
                         <div>
                             <label for="company"
