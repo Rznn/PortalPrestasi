@@ -13,7 +13,7 @@ class UserCompetitionController extends Controller
     public function index()
     {
         $users = Auth::user();
-        $competitions = Competition::latest()->get();
+        $competitions = Competition::latest()->simplePaginate(4);
         return view('/user/competition/index', [
             'competitions' => $competitions,
             'users' => $users

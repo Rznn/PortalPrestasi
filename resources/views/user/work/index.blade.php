@@ -113,6 +113,10 @@
     </div>
   </section>
 
+  <div class="pagination flex flex-col items-center mt-4">
+    {{ $works->links() }}
+  </div>
+
   <!-- ABOUT -->
   <footer class="footer-color text-white py-8 min-h-44 mt-24">
   <div class="container mx-auto">

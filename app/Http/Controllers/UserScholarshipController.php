@@ -13,7 +13,7 @@ class UserScholarshipController extends Controller
     public function index()
     {
         $users = Auth::user();
-        $scholarships = Scholarship::latest()->get();
+        $scholarships = Scholarship::latest()->simplePaginate(4);
         return view('/user/scholarship/index', [
             'scholarships' => $scholarships,
             'users' => $users

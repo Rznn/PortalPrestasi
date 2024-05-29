@@ -169,3 +169,29 @@ nav {
 ::-webkit-scrollbar-thumb {
   background: linear-gradient(var(--col-brand), var(--col-brand-light));
 }
+
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.pagination nav {
+    box-shadow: none !important;
+}
+
+.pagination span {
+    background-color: transparent; /* White background for pagination items */
+    border: none ; /* Light grey border */
+    color: #8b8888; /* Default text color */
+    border-radius: 5px;
+}
+
+.pagination a {
+    background-color: transparent; /* White background for pagination items */
+    border: none; /* Light grey border */
+    color: #000; /* Default text color */
+    border-radius: 5px;
+}
